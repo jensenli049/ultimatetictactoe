@@ -1,19 +1,19 @@
 /*
-Main Big Square
+  Main Big Square
 
- */
+*/
 public class BigSquare{
 
     private SmallSquare[] _STTT;
-    private char[] _BTTT;
+    private SmallSquare _BTTT;
     private boolean _isOver;
     private char _winner;
 
-    public BigSquare(int number){
+    public BigSquare(){
 	_STTT = new SmallSquare[9];
-	_BTTT = new char[9];
 	for(int i = 0; i < 9; i++)
-	    _BTTT[i] = (char) (i+'0');
+	    _STTT[i] = new SmallSquare();
+	_BTTT = new SmallSquare();
 	_isOver = false;
 	_winner = '-';
     }
@@ -22,7 +22,7 @@ public class BigSquare{
 	return _STTT;
     }
 
-    public char[] getBBoard(){
+    public SmallSquare getBBoard(){
 	return _BTTT;
     }
     public boolean isOver(){
@@ -43,7 +43,12 @@ public class BigSquare{
     }
 
     public void setBBoard(int index, char win){
-	_BTTT[index] = win;
+	_BTTT.setSquare(index, win);
     }
-		     
+
+    public void printBoard(){
+	for(SmallSquare x : _STTT)
+	    x.printBoard();
+	
+    }
 }
