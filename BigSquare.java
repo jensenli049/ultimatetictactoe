@@ -1,25 +1,30 @@
+/*
+Main Big Square
+
+ */
 public class BigSquare{
 
     private SmallSquare[] _STTT;
-    private int _number;
+    private char[] _BTTT;
     private boolean _isOver;
     private char _winner;
 
     public BigSquare(int number){
 	_STTT = new SmallSquare[9];
-	_number = number;
+	_BTTT = new char[9];
+	for(int i = 0; i < 9; i++)
+	    _BTTT[i] = (char) (i+'0');
 	_isOver = false;
 	_winner = '-';
     }
 
-    public SmallSquare[] getBoard(){
+    public SmallSquare[] getSBoard(){
 	return _STTT;
     }
 
-    public int getIndex(){
-	return _number;
+    public char[] getBBoard(){
+	return _BTTT;
     }
-
     public boolean isOver(){
 	return _isOver;
     }
@@ -28,9 +33,17 @@ public class BigSquare{
 	return _winner;
     }
 
+    public SmallSquare getSquare(int index){
+	return _STTT[index];
+    }
+    
     public void setWinner(char player){
 	_isOver = true;
 	_winner = player;
+    }
+
+    public void setBBoard(int index, char win){
+	_BTTT[index] = win;
     }
 		     
 }

@@ -1,25 +1,35 @@
 public class SmallSquare{
     
-    private char _letter;
-    private int _number;
+    private char[] _sttt;
+    private char _winner;
+    private boolean _gameover;
 
-    public SmallSquare(char letter, int number){
-	_letter = letter;
-	_number = number;
+    public SmallSquare(){
+	_sttt = new char[9];
+	for(int i = 0; i < 9; i++)
+	    _sttt[i] = (char) (i+'0');
+	_gameover = false;
+	_winner = '-';
+    }
+
+    public char[] getBoard(){
+	return _sttt;
+    }
+
+    public char getWinner(){
+	return _winner;
     }
     
-    public char getLetter(){
-	return _letter;
+    public boolean isOver(){
+	return _gameover;
     }
 
-    public int getIndex(){
-	return _number;
+    public void setWinner(char player){
+	_gameover = true;
+	_winner = player;
     }
 
-    public boolean used(){
-	if( _letter == 'x' || _letter == 'o' )
-	    return true;
-	return false;
+    public void setSquare(int index, char player){
+	_sttt[index] = player;
     }
-    
 }
