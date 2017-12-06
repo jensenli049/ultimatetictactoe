@@ -8,7 +8,8 @@ public class BigSquare{
     private SmallSquare _BTTT;
     private boolean _isOver;
     private char _winner;
-
+    private int _player;
+    
     public BigSquare(){
 	_STTT = new SmallSquare[9];
 	for(int i = 0; i < 9; i++)
@@ -16,12 +17,17 @@ public class BigSquare{
 	_BTTT = new SmallSquare();
 	_isOver = false;
 	_winner = '-';
+	_player = 1;
     }
 
     public SmallSquare[] getSBoard(){
 	return _STTT;
     }
 
+    public int getPlayer(){
+	return (_player %= 2) + 1;
+    }
+    
     public SmallSquare getBBoard(){
 	return _BTTT;
     }
@@ -48,7 +54,8 @@ public class BigSquare{
 
     public void printBoard(){
 	for(SmallSquare x : _STTT)
-	    x.printBoard();
+	    if(!x.isOver())
+		x.printBoard();
 	
     }
 }

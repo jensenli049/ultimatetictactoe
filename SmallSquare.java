@@ -21,12 +21,23 @@ public class SmallSquare{
     }
     
     public boolean isOver(){
+	populate();
+	if((_sttt[0] == _sttt[1] && _sttt[1] == _sttt[2]) ||
+	   (_sttt[3] == _sttt[4] && _sttt[4] == _sttt[5]) ||
+	   (_sttt[6] == _sttt[7] && _sttt[7] == _sttt[8]) ||
+	   (_sttt[0] == _sttt[3] && _sttt[3] == _sttt[6]) ||
+	   (_sttt[1] == _sttt[4] && _sttt[4] == _sttt[7]) ||
+	   (_sttt[2] == _sttt[5] && _sttt[5] == _sttt[8]) ||
+	   (_sttt[2] == _sttt[4] && _sttt[4] == _sttt[6]) ||
+	   (_sttt[0] == _sttt[4] && _sttt[4] == _sttt[8]))
+	    _gameover = true;
+	unpopulate();
 	return _gameover;
     }
 
     public void setWinner(char player){
-	_gameover = true;
-	_winner = player;
+	if(_gameover)
+	    _winner = player;
     }
 
     public void setSquare(int index, char player){
