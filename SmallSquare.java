@@ -13,8 +13,8 @@ public class SmallSquare{
 	_winner = '-';
     }
 
-    public char[] getBoard(){
-	return _sttt;
+    public char getBoard(int val){
+	return _sttt[val];
     }
 
     public char getWinner(){
