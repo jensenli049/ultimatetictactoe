@@ -9,6 +9,8 @@ public class BigSquare{
     private boolean _isOver;
     private char _winner;
     private int _player;
+
+    private final String DIVIDER1 = "------------+-------------+------------"
     
     public BigSquare(){
 	_STTT = new SmallSquare[9];
@@ -53,9 +55,28 @@ public class BigSquare{
     }
 
     public void printBoard(){
-	for(SmallSquare x : _STTT)
-	    if(!x.isOver())
-		x.printBoard();
-	
+	//17 lines
+	/* 
+	     |   |    |    |   |    |    |   |
+	  ---+---+--- | ---+---+--- | ---+---+---
+	     |   |    |    |   |    |    |   |
+	  ---+---+--- | ---+---+--- | ---+---+---
+	     |   |    |    |   |    |    |   |
+	  ------------+-------------+------------
+	     |   |    |    |   |    |    |   |
+	  ---+---+--- | ---+---+--- | ---+---+---
+	     |   |    |    |   |    |    |   |
+	  ---+---+--- | ---+---+--- | ---+---+---
+	     |   |    |    |   |    |    |   |
+	  ------------+------------+-----------
+	     |   |    |    |   |    |    |   |
+	  ---+---+--- | ---+---+--- | ---+---+---
+	     |   |    |    |   |    |    |   |
+	  ---+---+--- | ---+---+--- | ---+---+---
+	     |   |    |    |   |    |    |   |	  
+	 */
+	for (int a = 0; a < 5; a++) {
+	    
+	}
     }
 }

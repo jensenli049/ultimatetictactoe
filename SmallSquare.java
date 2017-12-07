@@ -3,7 +3,8 @@ public class SmallSquare{
     private char[] _sttt;
     private char _winner;
     private boolean _gameover;
-
+    private int state = 0;
+    
     public SmallSquare(){
 	_sttt = new char[9];
 	for(int i = 0; i < 9; i++)
