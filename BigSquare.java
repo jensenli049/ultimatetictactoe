@@ -12,6 +12,7 @@ public class BigSquare{
 
     private final char p1 = 'x';
     private final char p2 = 'o';
+    private final char tie = '-';
     
     public BigSquare(){
 	_STTT = new SmallSquare[9];
@@ -53,6 +54,11 @@ public class BigSquare{
     
     public void setBBoard(int index, char win){
 	_BTTT.setSquare(index, win);
+    }
+
+    public void freebie(){ //need to figure out
+
+
     }
 
     public void printBoard(){

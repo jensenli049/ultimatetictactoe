@@ -7,8 +7,14 @@ public class UTTT{
 	/*testing*/
 	board.getSquare(2).setSquare(3,'x');
 	board.getSquare(2).setSquare(7,'o');
+	board.getSquare(2).setSquare(4,'x');
+	board.getSquare(2).setSquare(1,'o');
 	board.getSquare(2).populate();
 	board.printBoard();
+	System.out.println("User places 'x' in 6");
+	board.getSquare(2).setSquare(5,'x');
+	System.out.println(board.getSquare(2).isOver());
+	board.getSquare(2).setWinner('x');
 	System.out.println();
 	System.out.println("=====================================================");
 	System.out.println();
