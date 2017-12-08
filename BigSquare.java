@@ -10,8 +10,8 @@ public class BigSquare{
     private char _winner;
     private int _player;
 
-    private final String DIVIDER1 = "---+---+--- | ---+---+--- | ---+---+---";
-    private final String DIVIDER2 = "------------+-------------+------------";
+    private final char p1 = 'x';
+    private final char p2 = 'o';
     
     public BigSquare(){
 	_STTT = new SmallSquare[9];
@@ -27,15 +27,20 @@ public class BigSquare{
 	return _STTT;
     }
 
-    public int getPlayer(){
-	return (_player %= 2) + 1;
+    public char getPlayer(){
+	_player++; //increments turn before returning current player
+	if(_player % 2 == 1) //since turn is incremented, p1 will be 1
+	    return p1;
+	else //and p2 would be 0 instead of the opposite
+	    return p2;
     }
     
     public SmallSquare getBBoard(){
 	return _BTTT;
     }
+    
     public boolean isOver(){
-	return _isOver;
+	return _BTTT.isOver();
     }
 
     public char getWinner(){
@@ -46,23 +51,21 @@ public class BigSquare{
 	return _STTT[index];
     }
     
-    public void setWinner(char player){
-	_isOver = true;
-	_winner = player;
-    }
-
     public void setBBoard(int index, char win){
 	_BTTT.setSquare(index, win);
     }
 
     public void printBoard(){
+	String DIVIDER1 = "---+---+--- | ---+---+--- | ---+---+---";
+	String DIVIDER2 = "------------+-------------+------------";
+
 	char[] temp = new char[81];
 	int counter = 0;
 	for(int i = 0; i < 3; i++) 
 	    for(int j = 0; j < 3; j++) 
 		for(int k = 0; k < 3; k++) 
 		    for(int l = 0; l < 3; l++) {
-			temp[counter] = _STTT[i*3 + k].getBoard(j * 3 + l);
+			temp[counter] = _STTT[i*3 + k].getIndex(j * 3 + l);
 			counter++;
 		    }
 	

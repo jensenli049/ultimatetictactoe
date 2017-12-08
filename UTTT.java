@@ -4,8 +4,7 @@ public class UTTT{
 	//initializing
 	BigSquare board = new BigSquare();
 
-	//testing
-	
+	/*testing*/
 	board.getSquare(2).setSquare(3,'x');
 	board.getSquare(2).setSquare(7,'o');
 	board.getSquare(2).populate();
@@ -17,6 +16,9 @@ public class UTTT{
 	board.getSquare(5).setSquare(2,'x');
 	board.getSquare(7).setSquare(8,'o');
 	board.printBoard();
+	System.out.println("=====================================================");
+	board.getBBoard().printBoard();
 
+	
 	}
 }

@@ -13,7 +13,7 @@ public class SmallSquare{
 	_winner = '-';
     }
 
-    public char getBoard(int val){
+    public char getIndex(int val){
 	return _sttt[val];
     }
 
@@ -31,14 +31,20 @@ public class SmallSquare{
 	   (_sttt[2] == _sttt[5] && _sttt[5] == _sttt[8]) ||
 	   (_sttt[2] == _sttt[4] && _sttt[4] == _sttt[6]) ||
 	   (_sttt[0] == _sttt[4] && _sttt[4] == _sttt[8]))
-	    _gameover = true;
+	    return _gameover = true;
 	unpopulate();
-	return _gameover;
+	for( char x : _sttt )
+	    if( x == ' ')
+		return false;
+	setWinner('-');
+	return _gameover = true;
     }
 
     public void setWinner(char player){
 	if(_gameover)
 	    _winner = player;
+	for (int i = 0; i < _sttt.length; i++)
+	    _sttt[i] = player;
     }
 
     public void setSquare(int index, char player){
@@ -57,9 +63,16 @@ public class SmallSquare{
     }
 
     public void printBoard(){
-	System.out.print("[ ");
-	for(char x : _sttt)
-	    System.out.print(x + " ");
-	System.out.println("}");
+	populate();
+	String s1 = "            |             |            \n";
+	String s2 = "------------+-------------+------------\n";
+	System.out.print(s1+s1);
+	System.out.printf("      %c     |      %c      |     %c      \n",_sttt[0],_sttt[1],_sttt[2]);
+	System.out.print(s1+s1+s2+s1+s1);
+	System.out.printf("      %c     |      %c      |     %c      \n",_sttt[3],_sttt[4],_sttt[5]);
+	System.out.print(s1+s1+s2+s1+s1);
+	System.out.printf("      %c     |      %c      |     %c      \n",_sttt[6],_sttt[7],_sttt[8]);
+	System.out.print(s1+s1);
+	unpopulate();
     }
 }
