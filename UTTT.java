@@ -24,7 +24,9 @@ public class UTTT{
 	board.printBoard();
 	System.out.println("=====================================================");
 	board.getBBoard().printBoard();
+	
 
 	
-	}
+    }
+	
 }

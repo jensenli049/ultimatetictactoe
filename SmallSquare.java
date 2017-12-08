@@ -64,14 +64,14 @@ public class SmallSquare{
 
     public void printBoard(){
 	populate();
-	String s1 = "            |             |            \n";
-	String s2 = "------------+-------------+------------\n";
+	String s1 = "             |             |            \n";
+	String s2 = " ------------+-------------+------------\n";
 	System.out.print(s1+s1);
-	System.out.printf("      %c     |      %c      |     %c      \n",_sttt[0],_sttt[1],_sttt[2]);
+	System.out.printf("      %c      |      %c      |      %c      \n",_sttt[0],_sttt[1],_sttt[2]);
 	System.out.print(s1+s1+s2+s1+s1);
-	System.out.printf("      %c     |      %c      |     %c      \n",_sttt[3],_sttt[4],_sttt[5]);
+	System.out.printf("      %c      |      %c      |      %c      \n",_sttt[3],_sttt[4],_sttt[5]);
 	System.out.print(s1+s1+s2+s1+s1);
-	System.out.printf("      %c     |      %c      |     %c      \n",_sttt[6],_sttt[7],_sttt[8]);
+	System.out.printf("      %c      |      %c      |      %c      \n",_sttt[6],_sttt[7],_sttt[8]);
 	System.out.print(s1+s1);
 	unpopulate();
     }
