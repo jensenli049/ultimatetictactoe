@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class BigSquare{
 
@@ -57,26 +59,38 @@ public class BigSquare{
 	_BTTT.setSquare(index, win);
     }
 
-    public int freebie(){ //need to figure out
+    public int freebie(){
+	System.out.println("Current Board");
+	printBoard();
+	System.out.println("=====================================================");
+	System.out.println("You have a freebie");
 	_BTTT.printBoard();
-	
-	return 1;
+	return pickSquare(_BTTT.getBoard());
     }
 
-    public char pickSquare(char[] ttt, int guess){
-	int[] unused = new int[9];
-	for(char x : ttt)
-	    if((x - '0' > 0) && (x -'0' < 10))
-		unused.add(x-'0');
-	    
+    public int pickSquare(char[] ttt){
+	int[] unused = new int[9]; //make list of available indices
+	for(char x : ttt){
+	    int tmp = x - '0';
+	    if((tmp > 0) && (tmp < 10))
+		unused[tmp] = tmp;
+	}
 	Scanner s = new Scanner(System.in);
-	System.out.print("Pick a square: ");
-	int guess = s.nextInt();
-	while (Arrays.asList(ttt).contains(guess)){
+	System.out.print("Pick a square: "); //player picks
+	int num = s.nextInt();
+	while (!findVal(unused,num)){ //asks until player picks and available square
 	    System.out.println("Please enter a numbered square!");
 	    System.out.print("Pick a square: ");
-	    guess = s.next();
+	    num = s.nextInt();
 	}
+	return num - 1; //returns index of available square
+    }
+
+    public boolean findVal(int[] arr, int val){
+	for(int x : arr)
+	    if(x == val)
+		return true;
+	return false;
     }
 
     public void printBoard(){
