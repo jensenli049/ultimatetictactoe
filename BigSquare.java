@@ -21,7 +21,7 @@ public class BigSquare{
 	_BTTT = new SmallSquare();
 	_isOver = false;
 	_winner = '-';
-	_turn = 1;
+	_turn = 0;
     }
 
     public SmallSquare[] getSBoard(){
@@ -59,6 +59,14 @@ public class BigSquare{
 	_BTTT.setSquare(index, win);
     }
 
+    public int normalTurn(int index){
+	System.out.println("Current Board");
+	_STTT[index].populate();
+	printBoard();
+	_STTT[index].unpopulate();
+	return pickSquare(_STTT[index]);
+    }
+
     public int freebie(){
 	System.out.println("Current Board");
 	printBoard();
@@ -78,12 +86,15 @@ public class BigSquare{
 	}
 	Scanner s = new Scanner(System.in);
 	System.out.print("Pick a square: "); //player picks
+	while(!s.hasNextInt()) s.next();
 	int num = s.nextInt();
-	while (!findVal(unused,num)){ //asks until player picks and available square
+	while (!findVal(unused,num) && !s.hasNextInt()){ //asks until player picks and available square
 	    System.out.println("Please enter a numbered square!");
 	    System.out.print("Pick a square: ");
+	    s.next();
 	    num = s.nextInt();
 	}
+	
 	ttt.unpopulate();
 	return num - 1; //returns index of available square
     }

@@ -3,8 +3,22 @@ public class UTTT{
     public static void main(String [] args){
 	//initializing
 	BigSquare board = new BigSquare();
+	int index;
+	char cPlayer;
 
-	/*testing*/
+	//run game
+	while(!board.isOver()){
+	    cPlayer = board.getPlayer(); //begins at turn 1
+	    if(board.getTurn() == 1)
+		index = board.freebie();
+	    
+		    
+
+	}	
+
+    }  
+}
+/*testing
 	board.getSquare(2).setSquare(3,'x');
 	board.getSquare(2).setSquare(7,'o');
 	board.getSquare(2).setSquare(4,'x');
@@ -27,7 +41,4 @@ public class UTTT{
 	
 	System.out.println("=====================================================");
 	System.out.println("Index return: " + board.freebie());
-	
-    }
-	
-}
+*/
