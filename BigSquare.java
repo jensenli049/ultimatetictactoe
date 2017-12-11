@@ -65,15 +65,16 @@ public class BigSquare{
 	System.out.println("=====================================================");
 	System.out.println("You have a freebie");
 	_BTTT.printBoard();
-	return pickSquare(_BTTT.getBoard());
+	return pickSquare(_BTTT);
     }
 
-    public int pickSquare(char[] ttt){
+    public int pickSquare(SmallSquare ttt){
 	int[] unused = new int[9]; //make list of available indices
-	for(char x : ttt){
+	ttt.populate();
+	for(char x : ttt.getBoard()){
 	    int tmp = x - '0';
 	    if((tmp > 0) && (tmp < 10))
-		unused[tmp] = tmp;
+		unused[tmp-1] = tmp;
 	}
 	Scanner s = new Scanner(System.in);
 	System.out.print("Pick a square: "); //player picks
@@ -83,6 +84,7 @@ public class BigSquare{
 	    System.out.print("Pick a square: ");
 	    num = s.nextInt();
 	}
+	ttt.unpopulate();
 	return num - 1; //returns index of available square
     }
 

@@ -25,7 +25,8 @@ public class UTTT{
 	System.out.println("=====================================================");
 	board.getBBoard().printBoard();
 	
-
+	System.out.println("=====================================================");
+	System.out.println("Index return: " + board.freebie());
 	
     }
 	
