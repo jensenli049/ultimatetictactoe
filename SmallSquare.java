@@ -62,12 +62,12 @@ public class SmallSquare{
 
     public void populate(){
 	for(int i = 0; i < 9; i++)
-	    if(!(_sttt[i] == 'x' || _sttt[i] == 'o'))
+	    if(!(_sttt[i] == 'x' || _sttt[i] == 'o' || _sttt[i] == '-'))
 		_sttt[i] = (char)(i+'1');
     }
     public void unpopulate(){
 	for(int i = 0; i < 9; i++)
-	    if(!(_sttt[i] == 'x' || _sttt[i] == 'o'))
+	    if(!(_sttt[i] == 'x' || _sttt[i] == 'o' || _sttt[i] == '-'))
 		_sttt[i] = ' ';
     }
 

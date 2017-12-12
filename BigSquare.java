@@ -92,10 +92,11 @@ public class BigSquare{
 	    s.next();
 	}
 	int num = s.nextInt();
+
+	
 	while (!findVal(unused,num)){ //asks until player picks and available square
 	    System.out.println("Please enter a numbered square!");
 	    System.out.print("Pick a square: ");
-	    //s.next();
 	    num = s.nextInt();
 	}
 	
