@@ -10,6 +10,7 @@ public class UTTT{
 	while(!board.isOver()){
 	    cPlayer = board.getPlayer(); //begins at turn 1
 	    currIndex = nextIndex;
+	    System.out.println("=====================================================");
 	    System.out.println("It is Player " + cPlayer + "'s turn!");
 	    if( (board.getTurn() == 1) || board.getSquare(currIndex).isOver())
 		currIndex = board.freebie();

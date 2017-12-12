@@ -86,17 +86,13 @@ public class BigSquare{
 	}
 	Scanner s = new Scanner(System.in);
 	System.out.print("Pick a square: "); //player picks
-	while(!s.hasNextInt()){
-	    System.out.println("Please enter a numbered square!");
-	    System.out.print("Pick a square: ");
-	    s.next();
-	}
-	int num = s.nextInt();
 
-	
+	int num = 10;
 	while (!findVal(unused,num)){ //asks until player picks and available square
-	    System.out.println("Please enter a numbered square!");
-	    System.out.print("Pick a square: ");
+	    while(!s.hasNextInt()){
+		System.out.print("Please enter a numbered square!\nPick a square: ");
+		s.next();
+	    }
 	    num = s.nextInt();
 	}
 	
