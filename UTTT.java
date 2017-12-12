@@ -23,8 +23,6 @@ public class UTTT{
 	    else
 		board.setBBoard(currIndex,'-');
 	}
-	
-	System.out.println(board.getBBoard().getWinner());
 	if(board.getBBoard().getWinner() == '-')
 	    System.out.println("The game is over! Both Players tied!");
 	else

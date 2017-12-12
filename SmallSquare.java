@@ -23,22 +23,23 @@ public class SmallSquare{
     }
 
     public char getWinner(){
-	return _winner;
+	return _winner = _sttt[0];
     }
     
     public boolean isOver(){
 	populate();
 	if((_sttt[0] == _sttt[1] && _sttt[1] == _sttt[2]) ||
-	   (_sttt[3] == _sttt[4] && _sttt[4] == _sttt[5]) ||
-	   (_sttt[6] == _sttt[7] && _sttt[7] == _sttt[8]) ||
 	   (_sttt[0] == _sttt[3] && _sttt[3] == _sttt[6]) ||
+	   (_sttt[0] == _sttt[4] && _sttt[4] == _sttt[8]))
+	    return setWinner(_sttt[0]);
+	if((_sttt[3] == _sttt[4] && _sttt[4] == _sttt[5]) ||
 	   (_sttt[1] == _sttt[4] && _sttt[4] == _sttt[7]) ||
-	   (_sttt[2] == _sttt[5] && _sttt[5] == _sttt[8]) ||
-	   (_sttt[2] == _sttt[4] && _sttt[4] == _sttt[6]) ||
-	   (_sttt[0] == _sttt[4] && _sttt[4] == _sttt[8])){
-	    //setWinner(winner);
-	    return _gameover = true;
-	}
+	   (_sttt[2] == _sttt[4] && _sttt[4] == _sttt[6]))
+	    return setWinner(_sttt[4]);
+	if((_sttt[6] == _sttt[7] && _sttt[7] == _sttt[8]) ||
+	   (_sttt[2] == _sttt[5] && _sttt[5] == _sttt[8]))
+	    return setWinner(_sttt[8]);
+	
 	unpopulate();
 	for( char x : _sttt )
 	    if( x == ' ')
@@ -47,11 +48,12 @@ public class SmallSquare{
 	return _gameover = true;
     }
 
-    public void setWinner(char player){
+    public boolean setWinner(char player){
 	if(_gameover)
 	    _winner = player;
 	for (int i = 0; i < _sttt.length; i++)
 	    _sttt[i] = player;
+	return _gameover = true;
     }
 
     public void setSquare(int index, char player){
@@ -72,14 +74,14 @@ public class SmallSquare{
     public String addColor (char z) {
 	String ANSI_RED = "\u001B[31m";
 	String ANSI_CYN = "\u001B[36m";
-	String ANSI_GRN = "\u001B[33m";
+	String ANSI_YLW = "\u001B[33m";
 	String ANSI_RST = "\u001B[0m";
 	
 	if (z == 'x') 
 	    return ANSI_RED + z + ANSI_RST;
 	if (z == 'o')
 	    return ANSI_CYN + z + ANSI_RST;
-	return ANSI_GRN + z + ANSI_RST;
+	return ANSI_YLW + z + ANSI_RST;
     }
 
     public void printBoard(){
