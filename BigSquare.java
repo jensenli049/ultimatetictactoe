@@ -85,14 +85,14 @@ public class BigSquare{
 		unused[tmp-1] = tmp;
 	}
 	Scanner s = new Scanner(System.in);
-	System.out.print("Pick a square: "); //player picks
-
 	int num = 10;
 	while (!findVal(unused,num)){ //asks until player picks and available square
+	    System.out.print("Please enter a numbered square!\nPick a square: "); //player picks
 	    while(!s.hasNextInt()){
 		System.out.print("Please enter a numbered square!\nPick a square: ");
 		s.next();
 	    }
+	    //System.out.print("Please enter a numbered square!\nPick a square: ");
 	    num = s.nextInt();
 	}
 	
