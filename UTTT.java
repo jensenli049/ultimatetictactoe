@@ -12,6 +12,7 @@ public class UTTT{
 	    currIndex = nextIndex;
 	    if( (board.getTurn() == 1) || board.getSquare(currIndex).isOver())
 		currIndex = board.freebie();
+	    System.out.println("It is Player " + cPlayer + "'s turn!");
 	    nextIndex = board.normalTurn(currIndex);
 	    board.getSquare(currIndex).setSquare(nextIndex,cPlayer);
 	    if(board.getSquare(currIndex).isOver() && !(board.getSquare(currIndex).getIndex(0) == '-')){
@@ -21,10 +22,11 @@ public class UTTT{
 	    }
 	    else
 		board.setBBoard(currIndex,'-');
-	    
-
 	}	
-
+	if(board.getBBoard().getWinner() == '-')
+	    System.out.println("The game is over! Both Players tied!");
+	else
+	    System.out.println("The game is over! Player " + board.getBBoard().getWinner() + " won the game!");
     }  
 }
 /*testing
