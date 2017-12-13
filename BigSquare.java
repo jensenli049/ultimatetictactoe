@@ -33,7 +33,7 @@ public class BigSquare{
     }
     public char getPlayer(){
 	_turn++; //increments turn before returning current player
-	if(_turn % 2 == 0) //since turn is incremented, p1 will be 1
+	if(_turn % 2 == 1) //since turn is incremented, p1 will be 1
 	    return p1;
 	else //and p2 would be 0 instead of the opposite
 	    return p2;
@@ -85,7 +85,7 @@ public class BigSquare{
 		unused[tmp-1] = tmp;
 	}
 	Scanner s = new Scanner(System.in);
-	int num = 10;
+	int num = 0;
 	while (!findVal(unused,num)){ //asks until player picks and available square
 	    System.out.print("Please enter a numbered square!\nPick a square: "); //player picks
 	    while(!s.hasNextInt()){
@@ -102,7 +102,7 @@ public class BigSquare{
 
     public boolean findVal(int[] arr, int val){
 	for(int x : arr)
-	    if(x == val)
+	    if(x == val && x != 0)
 		return true;
 	return false;
     }
