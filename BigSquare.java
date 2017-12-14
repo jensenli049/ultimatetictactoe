@@ -59,24 +59,24 @@ public class BigSquare{
 	_BTTT.setSquare(index, win);
     }
 
-    public int normalTurn(int index, boolean _2p){
+    public int normalTurn(int index, char ai_mode){
 	System.out.println("Current Board");
 	_STTT[index].populate();
 	printBoard();
 	_STTT[index].unpopulate();
-	return pickSquare(_STTT[index], _2p);
+	return pickSquare(_STTT[index], ai_mode);
     }
 
-    public int freebie(boolean _2p){
+    public int freebie(char ai_mode){
 	System.out.println("Current Board");
 	printBoard();
 	System.out.println("=====================================================");
 	System.out.println("You have a freebie");
 	_BTTT.printBoard();
-	return pickSquare(_BTTT, _2p);
+	return pickSquare(_BTTT, ai_mode);
     }
 
-    public int pickSquare(SmallSquare ttt, boolean _2p){
+    public int pickSquare(SmallSquare ttt, char ai_mode){
 	int[] unused = new int[9]; //make list of available indices
 	ttt.populate();
 	for(char x : ttt.getBoard()){
@@ -86,7 +86,7 @@ public class BigSquare{
 	}
 	Scanner s = new Scanner(System.in);
 	int num = 0;
-	if(_2p)
+	if(ai_mode == ' ')
 	    while (!findVal(unused,num)){ //asks until player picks and available square
 		System.out.print("Please enter a numbered square!\nPick a square: "); //player picks
 		while(!s.hasNextInt()){
@@ -98,6 +98,7 @@ public class BigSquare{
 	    }
 	else{
 	    //add ai stuff
+	    
 	}
 	ttt.unpopulate();
 	return num - 1; //returns index of available square
