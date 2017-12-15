@@ -16,7 +16,7 @@ public class UTTT{
 	    System.out.print("Game Modes:\n1. 2 Player (2p)\n2. Computer (AI)\nPick a game mode: ");
 	    String ans = s.next();
 	    while(!(ans.equals("2p") || ans.equals("AI"))){
-		System.out.println("Please 2p or AI!");
+		System.out.println("Please enter 2p or AI!");
 		System.out.print("Pick a game mode: ");
 		ans = s.next();
 	    }
@@ -24,7 +24,7 @@ public class UTTT{
 		System.out.println("=====================================================");
 		System.out.print("Computer modes:\n1. Random (r)\n2. Blocking (b)\n3. Thinking (t)\nPick a computer mode: ");
 		while(!(ans.equals("r") || ans.equals("b") || ans.equals("t"))){
-		    System.out.println("Please r, b or t!");
+		    System.out.println("Please enter r, b or t!");
 		    System.out.print("Pick a computer mode: ");
 		    ans = s.next();
 		}

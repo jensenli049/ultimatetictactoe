@@ -98,7 +98,13 @@ public class BigSquare{
 	    }
 	else{
 	    //add ai stuff
-	    
+	    AI computer = new AI();
+	    if(ai_mode == 'r')
+		num = computer.randomAI(unused);
+	    else if(ai_mode == 'b')
+		num = computer.blockingAI(unused);
+	    else
+		num = computer.readAheadAI(unused);
 	}
 	ttt.unpopulate();
 	return num - 1; //returns index of available square
