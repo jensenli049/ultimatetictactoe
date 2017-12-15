@@ -29,6 +29,7 @@ public class UTTT{
 		    ans = s.next();
 		}
 		mode = ans.charAt(0);
+		board.setAI();
 	    }
 	
 	    //run game
@@ -44,15 +45,18 @@ public class UTTT{
 		//-------------------------------------------
 		if( (board.getTurn() == 1) || board.getSquare(currIndex).isOver())
 		    currIndex = board.freebie(mode);
+		
 		nextIndex = board.normalTurn(currIndex, mode);
 		board.getSquare(currIndex).setSquare(nextIndex,cPlayer);
-
+		System.out.println("\n" + !(mode == ' ') + "\n");
 		if(board.getSquare(currIndex).isOver() && !(board.getSquare(currIndex).getIndex(0) == '-')){
 		    board.setBBoard(currIndex,cPlayer);
 		    board.getSquare(currIndex).setWinner(cPlayer);
 		}
 		else if(board.getSquare(currIndex).isOver())
 		    board.setBBoard(currIndex,'-');
+		if(!(mode == ' '))
+		    board.setAI();
 	    }
 	    System.out.println("=====================================================");
 	    System.out.println("=====================================================");

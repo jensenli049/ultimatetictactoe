@@ -7,6 +7,7 @@ public class BigSquare{
     private SmallSquare[] _STTT;
     private SmallSquare _BTTT;
     private boolean _isOver;
+    private boolean _AI;
     private char _winner;
     private int _turn;
 
@@ -20,6 +21,7 @@ public class BigSquare{
 	    _STTT[i] = new SmallSquare();
 	_BTTT = new SmallSquare();
 	_isOver = false;
+	_AI = false;
 	_winner = '-';
 	_turn = 0;
     }
@@ -37,6 +39,10 @@ public class BigSquare{
 	    return p1;
 	else //and p2 would be 0 instead of the opposite
 	    return p2;
+    }
+
+    public void setAI(){
+	_AI = true;
     }
     
     public SmallSquare getBBoard(){
@@ -64,7 +70,10 @@ public class BigSquare{
 	_STTT[index].populate();
 	printBoard();
 	_STTT[index].unpopulate();
-	return pickSquare(_STTT[index], ai_mode);
+	int ans = pickSquare(_STTT[index], ai_mode);
+	if(!(ai_mode == ' '))
+	    _AI = false;
+	return ans;
     }
 
     public int freebie(char ai_mode){
@@ -73,7 +82,8 @@ public class BigSquare{
 	System.out.println("=====================================================");
 	System.out.println("You have a freebie");
 	_BTTT.printBoard();
-	return pickSquare(_BTTT, ai_mode);
+	int temp = pickSquare(_BTTT, ai_mode);
+	return temp;
     }
 
     public int pickSquare(SmallSquare ttt, char ai_mode){
@@ -86,7 +96,7 @@ public class BigSquare{
 	}
 	Scanner s = new Scanner(System.in);
 	int num = 0;
-	if(ai_mode == ' ')
+	if(!_AI)
 	    while (!findVal(unused,num)){ //asks until player picks and available square
 		System.out.print("Please enter a numbered square!\nPick a square: "); //player picks
 		while(!s.hasNextInt()){
@@ -96,8 +106,7 @@ public class BigSquare{
 		//System.out.print("Please enter a numbered square!\nPick a square: ");
 		num = s.nextInt();
 	    }
-	else{
-	    //add ai stuff
+	else{ //add ai stuff
 	    AI computer = new AI();
 	    if(ai_mode == 'r')
 		num = computer.randomAI(unused);
@@ -105,6 +114,7 @@ public class BigSquare{
 		num = computer.blockingAI(unused);
 	    else
 		num = computer.readAheadAI(unused);
+	    //_AI = false;
 	}
 	ttt.unpopulate();
 	return num - 1; //returns index of available square
