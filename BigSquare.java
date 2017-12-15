@@ -41,8 +41,8 @@ public class BigSquare{
 	    return p2;
     }
 
-    public void setAI(){
-	_AI = true;
+    public void setAI(boolean mode){
+	_AI = mode;
     }
     
     public SmallSquare getBBoard(){
@@ -57,6 +57,10 @@ public class BigSquare{
 	return _winner;
     }
 
+    public boolean getAI(){
+	return _AI;
+    }
+    
     public SmallSquare getSquare(int index){
 	return _STTT[index];
     }
@@ -71,8 +75,6 @@ public class BigSquare{
 	printBoard();
 	_STTT[index].unpopulate();
 	int ans = pickSquare(_STTT[index], ai_mode);
-	if(!(ai_mode == ' '))
-	    _AI = false;
 	return ans;
     }
 
@@ -114,7 +116,6 @@ public class BigSquare{
 		num = computer.blockingAI(unused);
 	    else
 		num = computer.readAheadAI(unused);
-	    //_AI = false;
 	}
 	ttt.unpopulate();
 	return num - 1; //returns index of available square
