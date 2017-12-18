@@ -8,6 +8,19 @@ public class AI{
 		return true;
 	return false;
     }
+
+    public void fileAppend(String str, String filename) throws IOException{
+	BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
+	writer.append(str);
+	writer.close();
+    }
+
+    
+    
+    public bruteForce(int[] unused){
+	
+	
+    }
     
     public int randomAI(int[] unused){
 	Random rand = new Random();

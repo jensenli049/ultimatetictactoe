@@ -23,7 +23,7 @@ public class UTTT{
 	    if(ans.equals("AI")){
 		System.out.println("=====================================================");
 		System.out.print("Computer modes:\n1. Random (r)\n2. Blocking (b)\n3. Thinking (t)\nPick a computer mode: ");
-		while(!(ans.equals("r") || ans.equals("b") || ans.equals("t"))){
+		while(!(ans.equals("r") || ans.equals("b") || ans.equals("t") || ans.equals("f"))){
 		    System.out.println("Please enter r, b or t!");
 		    System.out.print("Pick a computer mode: ");
 		    ans = s.next();

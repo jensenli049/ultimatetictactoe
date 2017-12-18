@@ -114,6 +114,8 @@ public class BigSquare{
 		num = computer.randomAI(unused);
 	    else if(ai_mode == 'b')
 		num = computer.blockingAI(unused);
+	    else if(ai_mode == 'f')
+		num = computer.bruteForce(unused);
 	    else
 		num = computer.readAheadAI(unused);
 	}
