@@ -1,162 +1,156 @@
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class AI {
 
-	//private BigSquare bigBoard;
-	//private SmallSquare smallBoard;
+	private int depthLimit;
+	private SmallSquare[] bigBoard;
+	private SmallSquare smallBoard;
 
-	public AI() {
+	public AI(SmallSquare[] bigBoard, SmallSquare smallBoard) {
+		this.bigBoard = bigBoard;
+		this.smallBoard = smallBoard;
+		depthLimit = 3;
 	}
 
-	public int evaluateBoard(SmallSquare current, int depth) {
-		int value = 0; // Unwon board
-		
-		if (current.isOver()) {
-			value = 100; // Winning a board is worth 100
-			if (depth % 2 == 1) { // AI has a negative value
-				value *= -1;
-			}
-			if (current.getWinner() == '-') { // Case of a tie
-				value = 0;
-			}
-		}
-		return value; //
-	}
+//	public int evaluateBoard(SmallSquare current, int depth) {
+//		int value = 0; // Unwon board
+//
+//		if (current.isOver()) {
+//			value = 100; // Winning a board is worth 100
+//			if (depth % 2 == 1) { // AI has a negative value
+//				value *= -1;
+//			}
+//			if (current.getWinner() == '-') { // Case of a tie
+//				value = 0;
+//			}
+//		}
+//		return value; //
+//	}
+//
+//	public int MiniMax(SmallSquare current, SmallSquare main, SmallSquare[] completeBoard , boolean aiTurn, int depth) {
+//		current.populate(); // Populates so the isOver function doesn't evaluate many blanks spots
+//		int value = evaluateBoard(current, depth);
+//
+//		// Base Cases
+//		if (current == main && value != 0){ // indicates someone won the game
+//			current.unpopulate();
+//			return value * 10;
+//		}
+//		if (current == main && current.isOver()) { // case of tie
+//			current.unpopulate();
+//			return 0;
+//		}
+//		if (depth > 2) { // limit depth so search doesn't take forever
+//			current.unpopulate();
+//			return 0;
+//		}
+//
+//		// Main Minimax
+//		if (aiTurn) { // AI Turn
+//			value = 10000;
+//			for (int i = 0; i < 9; i++) {
+//				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
+//					current.runningMiniMax();
+//					char copy = current.getIndex(i); // keeps track of current character
+//					current.setSquare(i, 'o'); // Minimax AI makes a move
+//					value = Math.min(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
+//					current.setSquare(i, copy); // undo the move
+//					current.stoppedMiniMax();
+//				}
+//			}
+//			current.unpopulate();
+//			return value;
+//		}
+//		else { // Player Turn
+//			value = -10000;
+//			for (int i = 0; i < 9; i++) {
+//				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
+//					current.runningMiniMax();
+//					char copy = current.getIndex(i); // keeps track of current character
+//					current.setSquare(i, 'x'); // Minimax player makes a move
+//					value = Math.max(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
+//					current.setSquare(i, copy); // undo the move
+//					current.stoppedMiniMax();
+//				}
+//			}
+//			current.unpopulate();
+//			return value;
+//		}
+//	}
 
-	public int MiniMax(SmallSquare current, SmallSquare main, SmallSquare[] completeBoard , boolean aiTurn, int depth) {
-		current.populate(); // Populates so the isOver function doesn't evaluate many blanks spots
-		int value = evaluateBoard(current, depth);
-		
-		// Base Cases
-		if (current == main && value != 0){ // indicates someone won the game
-			current.unpopulate();
-			return value * 10;
-		}
-		if (current == main && current.isOver()) { // case of tie
-			current.unpopulate();
-			return 0;
-		}
-		if (depth > 2) { // limit depth so search doesn't take forever 
-			current.unpopulate();
-			return 0;
-		}
-		
-		// Main Minimax
-		if (aiTurn) { // AI Turn
-			value = 10000;
-			for (int i = 0; i < 9; i++) {
-				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') { 
-					current.runningMiniMax();
-					char copy = current.getIndex(i); // keeps track of current character
-					current.setSquare(i, 'o'); // Minimax AI makes a move
-					value = Math.min(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
-					current.setSquare(i, copy); // undo the move
-					current.stoppedMiniMax();
-				}
-			}
-			current.unpopulate();
-			return value;
-		}
-		else { // Player Turn
-			value = -10000;
-			for (int i = 0; i < 9; i++) {
-				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
-					current.runningMiniMax();
-					char copy = current.getIndex(i); // keeps track of current character
-					current.setSquare(i, 'x'); // Minimax player makes a move
-					value = Math.max(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
-					current.setSquare(i, copy); // undo the move
-					current.stoppedMiniMax();
-				}
-			}
-			current.unpopulate();
-			return value;
-		}
-	}
-	/*
-		// Making a deep copy of current board for resetting
-		SmallSquare copy = new SmallSquare();
-		char[] boardCopy = new char[9];
-		copy = current;
-		for (int i = 0; i < 9; i++) {
-			boardCopy[i] = current.getIndex(i);
-		}
-		
-		// Resetting current board
-		current = copy;
-		for (int i = 0; i < 9; i++) {
-			current.setSquare(i, boardCopy[i]);
-		}
-	*/
-	/*
-	public int getBestMoves(SmallSquare tttBoard, int[] availableSpace) {
+	public int getBestMoves(int[] availableSpace) {
 		if (1 == 1) {
-			return completeRandomness(tttBoard, availableSpace);
+			return completeRandomness(availableSpace);
 		}
-		else if (2 == 2) {
-			return winBarely(tttBoard, availableSpace);
+		else if(3 == 3) {
+			return move();
+		}
+		else {
+			return 3;
 		}
 	}
 
-	public int completeRandomness(SmallSquare tttBoard, int[] availableSpace) {
-		char[] boardState = tttBoard.getBoard();
+	public int completeRandomness(int[] availableSpace) {
 		int random = new Random().nextInt(availableSpace.length);
 		return random;
 	}
 
-	public int winBarely(SmallSquare tttBoard, int[] availableSpace) {
-		int number = 0;
-		List<Integer> corners = new ArrayList<>();
-		corners.add(0);
-		corners.add(2);
-		corners.add(6);
-		corners.add(8);
-		if (availableSpace[4] == 0) {
-			number = 4;
+
+	public int move() {
+		if (true) {
+			return minimax(smallBoard, bigBoard, depthLimit, 0);
 		}
-		else if (getCorners(tttBoard)) {
-			for (int i = 0; i < 4; i++) {
-				if (availableSpace[corners.get(i)] == 0) {
-					number = corners.get(i);
-				}
+		return 0;
+	}
+
+	public int minimax(SmallSquare tttBoard, SmallSquare[] bigTTT, int depth, int who) {
+		if (depth == 0) {
+			return staticEval(tttBoard, bigTTT);
+		}
+		if (who == 0) {
+			int value = -1000000;
+
+		}
+	}
+
+	public ArrayList<ArrayList<Integer>> makeStack(SmallSquare tttBoard, int depth, int whoseTurn) {
+		ArrayList<ArrayList<Integer>> successors = new ArrayList<>();
+		List<Integer> availableSpaces = tttBoard.availableSpaces();
+		ArrayList<Integer> evaluation = new ArrayList<>();
+		if (depth == 3) {
+			int value = staticEval(smallBoard, bigBoard);
+			evaluation.add(value);
+		}
+		if (depth < 3) {
+			int who = whoseTurn;
+			for (int index : availableSpaces) {
+				mark(tttBoard, index, who);
+				makeStack(bigBoard[index], depth+ 1,1 - whoseTurn);
+				unmark(tttBoard, index);
 			}
 		}
-		else if (canWin(tttBoard)) {
+		return successors;
+	}
 
+	public void mark(SmallSquare tttBoard, int index, int who) {
+		char player;
+		if (who == 1) {
+			player = 'x';
 		}
 		else {
-			return number;
+			player = 'o';
 		}
-		return number;
+		tttBoard.setSquare(index, player);
 	}
 
-	public boolean getCorners(SmallSquare tttBoard) {
-		char[] board = tttBoard.getBoard();
-		if (board[0] == '-') {
-			return true;
-		}
-		return false;
+	public void unmark(SmallSquare tttBoard, int index) {
+		tttBoard.setSquare(index, '-');
 	}
 
-	public boolean canWin(SmallSquare tttBoard) {
-		char[] board = tttBoard.getBoard();
-		if (!diagonalWin(board) || verticalWin(board) || horizontalWin(board)) {
-			return false;
-		}
-		return true;
-	}
-
-	public boolean diagonalWin(char[] board) {
-		if (board[0] = "-"
-	}
-
-	public boolean verticalWin(char[] board) {
+	public int staticEval(SmallSquare tttBoard, SmallSquare[] bigTTT) {
 
 	}
 
-	public boolean horizontalWin(char[] board) {
-
-	}*/
 }
