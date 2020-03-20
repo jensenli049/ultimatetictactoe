@@ -141,7 +141,7 @@ public class BigSquare {
 						if (moveValue == bestValue){
 							int random = new Random().nextInt(2);
 							if (random == 0) {
-								bestValue = moveValue;
+								num = i+1;
 							}
 						}
 					}
