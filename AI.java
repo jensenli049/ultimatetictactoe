@@ -26,7 +26,7 @@ public class AI {
 	}
 
 	public int MiniMax(SmallSquare current, SmallSquare main, SmallSquare[] completeBoard , boolean aiTurn, int depth) {
-		current.populate();
+		current.populate(); // Populates so the isOver function doesn't evaluate many blanks spots
 		int value = evaluateBoard(current, depth);
 		
 		// Base Cases
@@ -43,16 +43,17 @@ public class AI {
 			return 0;
 		}
 		
+		// Main Minimax
 		if (aiTurn) { // AI Turn
 			value = 10000;
 			for (int i = 0; i < 9; i++) {
-				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
+				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') { 
 					current.runningMiniMax();
-					char copy = current.getIndex(i);
-					current.setSquare(i, 'o');
+					char copy = current.getIndex(i); // keeps track of current character
+					current.setSquare(i, 'o'); // Minimax AI makes a move
 					value = Math.min(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
-					current.setSquare(i, copy);
-					current.runningMiniMax();
+					current.setSquare(i, copy); // undo the move
+					current.stoppedMiniMax();
 				}
 			}
 			current.unpopulate();
@@ -63,11 +64,11 @@ public class AI {
 			for (int i = 0; i < 9; i++) {
 				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
 					current.runningMiniMax();
-					char copy = current.getIndex(i);
-					current.setSquare(i, 'x');
+					char copy = current.getIndex(i); // keeps track of current character
+					current.setSquare(i, 'x'); // Minimax player makes a move
 					value = Math.max(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
-					current.setSquare(i, copy);
-					current.runningMiniMax();
+					current.setSquare(i, copy); // undo the move
+					current.stoppedMiniMax();
 				}
 			}
 			current.unpopulate();

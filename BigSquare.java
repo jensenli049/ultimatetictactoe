@@ -94,7 +94,6 @@ public class BigSquare {
 	}
 
 	public int pickSquare(SmallSquare tttBoard, char aiMode) {
-		int bestValue = 99999999;
 		int[] unused = new int[9];
 		tttBoard.populate();
 		for (char x : tttBoard.getBoard()) {
@@ -105,36 +104,36 @@ public class BigSquare {
 		}
 		Scanner reader = new Scanner(System.in);
 		int num = 0;
-		if (!AI) {
+		if (!AI) { // If 2p game
 			while (!findVal(unused, num)) {
-				System.out.println("Please enter a numbered square");
+				System.out.print("Please enter a numbered square: ");
 				while (!reader.hasNextInt()) {
-					System.out.println("Please enter a numbered square");
+					System.out.print("Please enter a numbered square: ");
 					reader.next();
 				}
 				num = reader.nextInt();
 			}
 		}
-		else {
-			if (turn % 2 == 1) {
+		else { // AI Game
+			if (turn % 2 == 1) { // If player's turn
 				while (!findVal(unused, num)) {
-					System.out.println("Please enter a numbered square");
+					System.out.print("Please enter a numbered square: ");
 					while (!reader.hasNextInt()) {
-						System.out.println("Please enter a numbered square");
+						System.out.print("Please enter a numbered square: ");
 						reader.next();
 					}
 					num = reader.nextInt();
 				}
 			}
-			else {
+			else { // AI turn
+				int bestValue = 99999999;
 				for (int i = 0; i < 9; i++) {
 					if (tttBoard.getIndex(i) != p1 && tttBoard.getIndex(i) != p2 && tttBoard.getIndex(i) != tie) {
-						System.out.println(turn);
-						printBoard();
-						char copy = tttBoard.getIndex(i);
-						tttBoard.setSquare(i, p2);
+						//printBoard();
+						char copy = tttBoard.getIndex(i); // keeps track of current character
+						tttBoard.setSquare(i, p2); // Minimax AI makes a move
 						int moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, 0);
-						tttBoard.setSquare(i, copy);
+						tttBoard.setSquare(i, copy); // undo the move
 						if (moveValue < bestValue){
 							bestValue = moveValue;
 							num = i+1;

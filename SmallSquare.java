@@ -28,11 +28,11 @@ public class SmallSquare {
 	}
 
 	public void runningMiniMax(){
-		mm = !mm;
+		mm = true;
 	}
 
-	public boolean running(){
-		return mm;
+	public void stoppedMiniMax(){
+		mm = false;
 	}
 
 	public void populate() {
