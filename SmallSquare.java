@@ -3,6 +3,7 @@ public class SmallSquare {
 	private char[] smallBoard;
 	private char winner;
 	private boolean gameOver;
+	private boolean mm = false;
 	private int state = 0;
 
 	public SmallSquare() {
@@ -26,6 +27,14 @@ public class SmallSquare {
 		return winner = smallBoard[0];
 	}
 
+	public void runningMiniMax(){
+		mm = !mm;
+	}
+
+	public boolean running(){
+		return mm;
+	}
+
 	public void populate() {
 		for (int i = 0; i < 9; i++) {
 			if(!(smallBoard[i] == 'x' || smallBoard[i] == 'o' || smallBoard[i] == '-'))
@@ -41,11 +50,11 @@ public class SmallSquare {
 	}
 
 	public boolean setWinner(char player) {
-		if (gameOver) {
-			winner = player;
-		}
-		for (int i = 0; i < smallBoard.length; i++) {
-			smallBoard[i] = player;
+		winner = player;
+		if (!mm) {
+			for (int i = 0; i < smallBoard.length; i++) {
+				smallBoard[i] = player;
+			}
 		}
 		return gameOver = true;
 	}

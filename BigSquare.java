@@ -1,8 +1,8 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Random;
-import java.awt.*;
+//import java.util.List;
+//import java.util.ArrayList;
+//import java.awt.*;
 
 public class BigSquare {
 
@@ -51,7 +51,6 @@ public class BigSquare {
 
 	public void setAI() {
 		AI = true;
-
 	}
 
 	public SmallSquare getSmallBoard() {
@@ -95,6 +94,7 @@ public class BigSquare {
 	}
 
 	public int pickSquare(SmallSquare tttBoard, char aiMode) {
+		int bestValue = 99999999;
 		int[] unused = new int[9];
 		tttBoard.populate();
 		for (char x : tttBoard.getBoard()) {
@@ -116,7 +116,7 @@ public class BigSquare {
 			}
 		}
 		else {
-			if (AI && turn % 2 == 1) {
+			if (turn % 2 == 1) {
 				while (!findVal(unused, num)) {
 					System.out.println("Please enter a numbered square");
 					while (!reader.hasNextInt()) {
@@ -127,7 +127,27 @@ public class BigSquare {
 				}
 			}
 			else {
-				num = computer.getBestMoves(tttBoard, unused);
+				for (int i = 0; i < 9; i++) {
+					if (tttBoard.getIndex(i) != p1 && tttBoard.getIndex(i) != p2 && tttBoard.getIndex(i) != tie) {
+						System.out.println(turn);
+						printBoard();
+						char copy = tttBoard.getIndex(i);
+						tttBoard.setSquare(i, p2);
+						int moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, 0);
+						tttBoard.setSquare(i, copy);
+						if (moveValue < bestValue){
+							bestValue = moveValue;
+							num = i+1;
+						}
+						if (moveValue == bestValue){
+							int random = new Random().nextInt(2);
+							if (random == 0) {
+								bestValue = moveValue;
+							}
+						}
+					}
+				}
+			 	//num = computer.getBestMoves(tttBoard, unused);
 			}
 		}
 		tttBoard.unpopulate();
