@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class UTTT {
 
-	@SuppressWarnings("checkstyle:CommentsIndentation")
 	public static void main(String[] args) {
+
 		while (true) {
 			//initializing
 			BigSquare board = new BigSquare();

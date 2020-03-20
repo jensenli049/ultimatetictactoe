@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class SmallSquare {
 
 	private char[] smallBoard;
 	private char winner;
-	private boolean gameOver;
 	private boolean mm = false;
+	private boolean gameOver;
 	private int state = 0;
 
 	public SmallSquare() {
@@ -27,12 +30,16 @@ public class SmallSquare {
 		return winner = smallBoard[0];
 	}
 
-	public void runningMiniMax(){
-		mm = true;
-	}
-
-	public void stoppedMiniMax(){
-		mm = false;
+	public List<Integer> availableSpaces() {
+		List<Integer> available = new ArrayList<>();
+		for (int index = 0; index < 9; index++) {
+			if (smallBoard[index] == 'x' || smallBoard[index] == 'o') {
+			}
+			else {
+				available.add(index);
+			}
+		}
+		return available;
 	}
 
 	public void populate() {
@@ -44,21 +51,28 @@ public class SmallSquare {
 
 	public void unpopulate() {
 		for (int i = 0; i < 9; i++) {
-			if(!(smallBoard[i] == 'x' || smallBoard[i] == 'o' || smallBoard[i] == '-'))
+			if (!(smallBoard[i] == 'x' || smallBoard[i] == 'o' || smallBoard[i] == '-'))
 				smallBoard[i] = ' ';
 		}
 	}
 
 	public boolean setWinner(char player) {
-		winner = player;
-		if (!mm) {
-			for (int i = 0; i < smallBoard.length; i++) {
-				smallBoard[i] = player;
-			}
+		if (gameOver) {
+			winner = player;
+		}
+		for (int i = 0; i < smallBoard.length; i++) {
+			smallBoard[i] = player;
 		}
 		return gameOver = true;
 	}
 
+	public void runningMiniMax(){
+		mm = true;
+	}
+
+	public void stoppedMiniMax(){
+		mm = false;
+	}
 
 	public boolean isOver() {
 		populate();

@@ -12,7 +12,7 @@ public class AI {
 
 	public int evaluateBoard(SmallSquare current, int depth) {
 		int value = 0; // Unwon board
-		
+
 		if (current.isOver()) {
 			value = 100; // Winning a board is worth 100
 			if (depth % 2 == 1) { // AI has a negative value
@@ -28,7 +28,7 @@ public class AI {
 	public int MiniMax(SmallSquare current, SmallSquare main, SmallSquare[] completeBoard , boolean aiTurn, int depth) {
 		current.populate(); // Populates so the isOver function doesn't evaluate many blanks spots
 		int value = evaluateBoard(current, depth);
-		
+
 		// Base Cases
 		if (current == main && value != 0){ // indicates someone won the game
 			current.unpopulate();
@@ -38,16 +38,16 @@ public class AI {
 			current.unpopulate();
 			return 0;
 		}
-		if (depth > 2) { // limit depth so search doesn't take forever 
+		if (depth > 2) { // limit depth so search doesn't take forever
 			current.unpopulate();
 			return 0;
 		}
-		
+
 		// Main Minimax
 		if (aiTurn) { // AI Turn
 			value = 10000;
 			for (int i = 0; i < 9; i++) {
-				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') { 
+				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
 					current.runningMiniMax();
 					char copy = current.getIndex(i); // keeps track of current character
 					current.setSquare(i, 'o'); // Minimax AI makes a move
@@ -83,7 +83,7 @@ public class AI {
 		for (int i = 0; i < 9; i++) {
 			boardCopy[i] = current.getIndex(i);
 		}
-		
+
 		// Resetting current board
 		current = copy;
 		for (int i = 0; i < 9; i++) {
@@ -99,13 +99,11 @@ public class AI {
 			return winBarely(tttBoard, availableSpace);
 		}
 	}
-
 	public int completeRandomness(SmallSquare tttBoard, int[] availableSpace) {
 		char[] boardState = tttBoard.getBoard();
 		int random = new Random().nextInt(availableSpace.length);
 		return random;
 	}
-
 	public int winBarely(SmallSquare tttBoard, int[] availableSpace) {
 		int number = 0;
 		List<Integer> corners = new ArrayList<>();
@@ -124,14 +122,12 @@ public class AI {
 			}
 		}
 		else if (canWin(tttBoard)) {
-
 		}
 		else {
 			return number;
 		}
 		return number;
 	}
-
 	public boolean getCorners(SmallSquare tttBoard) {
 		char[] board = tttBoard.getBoard();
 		if (board[0] == '-') {
@@ -139,7 +135,6 @@ public class AI {
 		}
 		return false;
 	}
-
 	public boolean canWin(SmallSquare tttBoard) {
 		char[] board = tttBoard.getBoard();
 		if (!diagonalWin(board) || verticalWin(board) || horizontalWin(board)) {
@@ -147,16 +142,11 @@ public class AI {
 		}
 		return true;
 	}
-
 	public boolean diagonalWin(char[] board) {
 		if (board[0] = "-"
 	}
-
 	public boolean verticalWin(char[] board) {
-
 	}
-
 	public boolean horizontalWin(char[] board) {
-
 	}*/
 }
