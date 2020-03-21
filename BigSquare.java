@@ -25,7 +25,7 @@ public class BigSquare {
 		AI = false;
 		winner = '-';
 		turn = 0;
-		computer = new AI();
+		computer = new AI(bigBoard, smallBoard);
 	}
 
 	public SmallSquare[] getBigBoard() {
@@ -123,27 +123,39 @@ public class BigSquare {
 				}
 			}
 			else { // AI turn
-				int bestValue = 99999999;
-				for (int i = 0; i < 9; i++) {
-					if (tttBoard.getIndex(i) != p1 && tttBoard.getIndex(i) != p2 && tttBoard.getIndex(i) != tie) {
-						//printBoard();
-						char copy = tttBoard.getIndex(i); // keeps track of current character
-						tttBoard.setSquare(i, p2); // Minimax AI makes a move
-						int moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, 0);
-						tttBoard.setSquare(i, copy); // undo the move
-						if (moveValue < bestValue){
-							bestValue = moveValue;
-							num = i+1;
+//				int bestValue = 99999999;
+//				for (int i = 0; i < 9; i++) {
+//					if (tttBoard.getIndex(i) != p1 && tttBoard.getIndex(i) != p2 && tttBoard.getIndex(i) != tie) {
+//						//printBoard();
+//						char copy = tttBoard.getIndex(i); // keeps track of current character
+//						tttBoard.setSquare(i, p2); // Minimax AI makes a move
+//						int moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, 0);
+//						tttBoard.setSquare(i, copy); // undo the move
+//						if (moveValue < bestValue){
+//							bestValue = moveValue;
+//							num = i+1;
+//						}
+//						if (moveValue == bestValue){
+//							int random = new Random().nextInt(2);
+//							if (random == 0) {
+//								bestValue = moveValue;
+//							}
+//						}
+//					}
+//				}
+				if (AI && turn % 2 == 1) {
+					while (!findVal(unused, num)) {
+						System.out.println("Please enter a numbered square");
+						while (!reader.hasNextInt()) {
+							System.out.println("Please enter a numbered square");
+							reader.next();
 						}
-						if (moveValue == bestValue){
-							int random = new Random().nextInt(2);
-							if (random == 0) {
-								bestValue = moveValue;
-							}
-						}
+						num = reader.nextInt();
 					}
 				}
-			 	//num = computer.getBestMoves(tttBoard, unused);
+				else {
+					num = computer.getBestMoves(tttBoard, bigBoard, unused);
+				}
 			}
 		}
 		tttBoard.unpopulate();
