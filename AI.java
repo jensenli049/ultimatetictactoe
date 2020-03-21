@@ -6,10 +6,76 @@ public class AI {
 
 	private int depthLimit;
 
-	public AI(SmallSquare[] bigBoard, SmallSquare smallBoard) {
 
+	public AI(SmallSquare[] bigBoard, SmallSquare smallBoard) {
 		depthLimit = 3;
 	}
+	//	public int evaluateBoard(SmallSquare current, int depth) {
+//		int value = 0; // Unwon board
+//
+//		if (current.isOver()) {
+//			value = 100; // Winning a board is worth 100
+//			if (depth % 2 == 1) { // AI has a negative value
+//				value *= -1;
+//			}
+//			if (current.getWinner() == '-') { // Case of a tie
+//				value = 0;
+//			}
+//		}
+//		return value; //
+//	}
+//
+//	public int MiniMax(SmallSquare current, SmallSquare main, SmallSquare[] completeBoard , boolean aiTurn, int depth) {
+//		current.populate(); // Populates so the isOver function doesn't evaluate many blanks spots
+//		int value = evaluateBoard(current, depth);
+//
+//		// Base Cases
+//		if (current == main && value != 0){ // indicates someone won the game
+//			current.unpopulate();
+//			return value * 10;
+//		}
+//		if (current == main && current.isOver()) { // case of tie
+//			current.unpopulate();
+//			return 0;
+//		}
+//		if (depth > 2) { // limit depth so search doesn't take forever
+//			current.unpopulate();
+//			return 0;
+//		}
+//
+//		// Main Minimax
+//		if (aiTurn) { // AI Turn
+//			value = 10000;
+//			for (int i = 0; i < 9; i++) {
+//				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
+//					current.runningMiniMax();
+//					char copy = current.getIndex(i); // keeps track of current character
+//					current.setSquare(i, 'o'); // Minimax AI makes a move
+//					value = Math.min(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
+//					current.setSquare(i, copy); // undo the move
+//					current.stoppedMiniMax();
+//				}
+//			}
+//			current.unpopulate();
+//			return value;
+//		}
+//		else { // Player Turn
+//			value = -10000;
+//			for (int i = 0; i < 9; i++) {
+//				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
+//					current.runningMiniMax();
+//					char copy = current.getIndex(i); // keeps track of current character
+//					current.setSquare(i, 'x'); // Minimax player makes a move
+//					value = Math.max(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
+//					current.setSquare(i, copy); // undo the move
+//					current.stoppedMiniMax();
+//				}
+//			}
+//			current.unpopulate();
+//			return value;
+//		}
+//	}
+
 
 	public int getBestMoves(SmallSquare tttBoard, SmallSquare[] bigBoard, int [] availableSpace) {
 		if (2 == 1) {
