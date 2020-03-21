@@ -57,11 +57,11 @@ public class SmallSquare {
 	}
 
 	public boolean setWinner(char player) {
-		if (gameOver) {
-			winner = player;
-		}
-		for (int i = 0; i < smallBoard.length; i++) {
-			smallBoard[i] = player;
+		winner = player;
+		if (!mm) {
+			for (int i = 0; i < smallBoard.length; i++) {
+				smallBoard[i] = player;
+			}
 		}
 		return gameOver = true;
 	}
