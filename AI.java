@@ -23,7 +23,7 @@ public class AI {
 		return value; //
 	}
 
-	public int MiniMax(SmallSquare current, SmallSquare main, SmallSquare[] completeBoard , boolean aiTurn, int depth) {
+	public int MiniMax(SmallSquare current, SmallSquare main, SmallSquare[] completeBoard , boolean aiTurn, boolean freebie, int depth) {
 		current.populate(); // Populates so the isOver function doesn't evaluate many blanks spots
 		int value = evaluateBoard(current);
 
@@ -39,20 +39,41 @@ public class AI {
 			current.unpopulate();
 			return 0;
 		}
-		if (depth > 2) { // limit depth so search doesn't take forever
-			current.unpopulate();
+		if (depth > depthLimit) { // limit depth so search doesn't take forever
+			//current.unpopulate();
 			return 0;
+		}
+		if (freebie){ // If there is a freebie
+			//System.out.println("5555555555555555555555555555555555555");
+			for (int i = 0; i < 9; i++) { // Loop through empty spots in board
+				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
+					completeBoard[i].runningMiniMax();
+					MiniMax(completeBoard[i], main, completeBoard, aiTurn, false, depth);
+					completeBoard[i].stoppedMiniMax();
+				}
+			}
 		}
 
 		// Main Minimax
 		if (aiTurn) { // AI Turn
-			value = 10000;
-			for (int i = 0; i < 9; i++) {
+			value = 1000000;
+			for (int i = 0; i < 9; i++) { // Normal AI Turn
 				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
 					current.runningMiniMax();
 					char copy = current.getIndex(i); // keeps track of current character
 					current.setSquare(i, 'o'); // Minimax AI makes a move
-					value = Math.min(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
+					completeBoard[i].runningMiniMax();
+					if (completeBoard[i].isOver()){ // If next board is won ==> freebie
+						//System.out.println("11111111111111111111111111111111111111111111111111111111111111111");
+						main.runningMiniMax();
+						value = Math.min(200, MiniMax(main, main, completeBoard, false, true, depth+1));
+						main.stoppedMiniMax();
+					}
+					else { // Next board is not won
+						//System.out.println("222222222222222222222222222222222222222222222222222222222222222");
+						value = Math.min(value, MiniMax(completeBoard[i], main, completeBoard, false, false, depth+1));
+					}
+					completeBoard[i].stoppedMiniMax();
 					current.setSquare(i, copy); // undo the move
 					current.stoppedMiniMax();
 				}
@@ -61,13 +82,24 @@ public class AI {
 			return value;
 		}
 		else { // Player Turn
-			value = -10000;
-			for (int i = 0; i < 9; i++) {
+			value = -1000000;
+			for (int i = 0; i < 9; i++) { // Normal Player Turn
 				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
 					current.runningMiniMax();
 					char copy = current.getIndex(i); // keeps track of current character
 					current.setSquare(i, 'x'); // Minimax player makes a move
-					value = Math.max(value, MiniMax(completeBoard[i], main, completeBoard, !aiTurn, depth+1));
+					completeBoard[i].runningMiniMax();
+					if (completeBoard[i].isOver()){ // If next board is won ==> freebie
+						//System.out.println("33333333333333333333333333333333333333333333333333333");
+						main.runningMiniMax();
+						value = Math.max(-200, MiniMax(main, main, completeBoard, true, true, depth+1));
+						main.stoppedMiniMax();
+					}
+					else { // Next board is not won
+						//System.out.println("444444444444444444444444444444444444444444444444");
+						value = Math.max(value, MiniMax(completeBoard[i], main, completeBoard, true, false, depth+1));
+					}
+					completeBoard[i].stoppedMiniMax();
 					current.setSquare(i, copy); // undo the move
 					current.stoppedMiniMax();
 				}

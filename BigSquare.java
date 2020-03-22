@@ -11,6 +11,7 @@ public class BigSquare {
 	private SmallSquare smallBoard;
 	private boolean isOver;
 	private boolean AI;
+	private boolean isFreebie;
 	private char winner;
 	private int turn;
 	private AI computer;
@@ -23,6 +24,7 @@ public class BigSquare {
 		smallBoard = new SmallSquare();
 		isOver = false;
 		AI = false;
+		isFreebie = false;
 		winner = '-';
 		turn = 0;
 		computer = new AI();
@@ -72,12 +74,14 @@ public class BigSquare {
 	}
 
 	public int freebie(char aiMode) {
+		isFreebie = true; // For ai mode
 		System.out.println("Current Board");
 		printBoard();
 		System.out.println("=====================================================");
 		System.out.println("You have a freebie");
 		smallBoard.printBoard();
 		int temp = pickSquare(smallBoard, aiMode);
+		isFreebie = false; // For ai mode
 		return temp;
 	}
 
@@ -101,7 +105,8 @@ public class BigSquare {
 		}
 		Scanner reader = new Scanner(System.in);
 		int num = 0;
-		if (!AI) { // If 2p game
+		// 2-Player Game
+		if (!AI) {
 			while (!findVal(unused, num)) {
 				System.out.print("Please enter a numbered square: ");
 				while (!reader.hasNextInt()) {
@@ -111,7 +116,8 @@ public class BigSquare {
 				num = reader.nextInt();
 			}
 		}
-		else { // AI Game
+		// AI Game (Minimax)
+		else {
 			if (turn % 2 == 1) { // If player's turn
 				while (!findVal(unused, num)) {
 					System.out.print("Please enter a numbered square: ");
@@ -127,9 +133,16 @@ public class BigSquare {
 				for (int i = 0; i < 9; i++) {
 					if (tttBoard.getIndex(i) != p1 && tttBoard.getIndex(i) != p2 && tttBoard.getIndex(i) != tie) {
 						//printBoard();
+						int moveValue;
 						char copy = tttBoard.getIndex(i); // keeps track of current character
 						tttBoard.setSquare(i, p2); // Minimax AI makes a move
-						int moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, 0);
+						if (isFreebie){
+							moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, true, 0);
+							isFreebie = false;
+						}
+						else {
+							moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, false, 0);
+						}
 						tttBoard.setSquare(i, copy); // undo the move
 						if (moveValue < bestValue){
 							bestValue = moveValue;
