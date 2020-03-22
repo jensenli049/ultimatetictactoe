@@ -13,7 +13,7 @@ public class AI {
 	
 	public int evaluateBoard(SmallSquare current) {
 		int value = 0; // Unwon board
-
+		
 		if (current.isOver()) {
 			value = 100; // Winning a board is worth 100
 			if (current.getWinner() == '-') { // Case of a tie
@@ -56,7 +56,9 @@ public class AI {
 
 		// Main Minimax
 		if (aiTurn) { // AI Turn
-			value = 1000000;
+			if (value == 0) {
+				value = 1000000;
+			}
 			for (int i = 0; i < 9; i++) { // Normal AI Turn
 				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
 					current.runningMiniMax();
@@ -66,7 +68,7 @@ public class AI {
 					if (completeBoard[i].isOver()){ // If next board is won ==> freebie
 						//System.out.println("11111111111111111111111111111111111111111111111111111111111111111");
 						main.runningMiniMax();
-						value = Math.min(200, MiniMax(main, main, completeBoard, false, true, depth+1));
+						value = Math.min(100, MiniMax(main, main, completeBoard, false, true, depth+1));
 						main.stoppedMiniMax();
 					}
 					else { // Next board is not won
@@ -82,7 +84,9 @@ public class AI {
 			return value;
 		}
 		else { // Player Turn
-			value = -1000000;
+			if (value == 0) {
+				value = -1000000;
+			}
 			for (int i = 0; i < 9; i++) { // Normal Player Turn
 				if (current.getIndex(i) != 'x' && current.getIndex(i) != 'o' && current.getIndex(i) != '-') {
 					current.runningMiniMax();
@@ -92,7 +96,7 @@ public class AI {
 					if (completeBoard[i].isOver()){ // If next board is won ==> freebie
 						//System.out.println("33333333333333333333333333333333333333333333333333333");
 						main.runningMiniMax();
-						value = Math.max(-200, MiniMax(main, main, completeBoard, true, true, depth+1));
+						value = Math.max(-100, MiniMax(main, main, completeBoard, true, true, depth+1));
 						main.stoppedMiniMax();
 					}
 					else { // Next board is not won

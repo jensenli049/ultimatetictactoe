@@ -137,13 +137,14 @@ public class BigSquare {
 						char copy = tttBoard.getIndex(i); // keeps track of current character
 						tttBoard.setSquare(i, p2); // Minimax AI makes a move
 						if (isFreebie){
-							moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, true, 0);
+							moveValue = Math.min(computer.evaluateBoard(tttBoard) * -1, computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, true, 0));
 							isFreebie = false;
 						}
 						else {
-							moveValue = computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, false, 0);
+							moveValue = Math.min(computer.evaluateBoard(tttBoard) * -1, computer.MiniMax(bigBoard[i], smallBoard, bigBoard, false, false, 0));
 						}
 						tttBoard.setSquare(i, copy); // undo the move
+						System.out.printf("At square %d, the move value is %d.\n", i+1, moveValue);
 						if (moveValue < bestValue){
 							bestValue = moveValue;
 							num = i + 1;
